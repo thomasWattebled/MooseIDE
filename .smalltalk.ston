@@ -1,0 +1,22 @@
+SmalltalkCISpec {
+  #preLoading : '.dependencies.st',
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'MooseIDE',
+      #directory : 'src',
+      #load : [ 'default' ],
+      #platforms : [ #pharo ],
+      #onConflict : #useIncoming,
+      #onUpgrade : #useIncoming
+    }
+  ], 
+  #testing : {
+    #exclude : {
+      #classes : [ #MiInspectorBrowserTest ]
+    },
+    #coverage : {
+      #packages : [ 'MooseIDE.*' ],
+      #format : #lcov
+    }
+  }
+}

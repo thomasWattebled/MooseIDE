@@ -1,0 +1,271 @@
+Class {
+	#name : #MiTagBrowserModel,
+	#superclass : #MiAbstractModel,
+	#instVars : [
+		'currentTag',
+		'currentCategory',
+		'mooseModel',
+		'entities',
+		'dynamicTags'
+	],
+	#category : #'MooseIDE-Tagging-Browser'
+}
+
+{ #category : #accessing }
+MiTagBrowserModel class >> iconForTag: aTag [
+
+	| arr arr2 |
+	arr := #( 0 0 4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 0 0 0 0 0 0 0 0 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 0 0 0 0 0 0 0 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 0 0 0 0 0 0 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 0 0 0 0 0 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 0 0 0 0 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 0 0 0 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 0 0 0 0 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 0 0 0 0 0 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 0 0 0 0 0 0 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 0 0 0 0 0 0 0 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          4278190080 4278190080 4278190080 4278190080 4278190080
+	          0 0 0 0 0 0 ).
+	arr2 := #( 0 0 4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 0 0 0 0 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 0 0 0 0 0 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 0 0 0 0 0 0 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 0 0 0 0 0 0 0 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 0 0 0 0 0 0 0
+	           0 4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 0 0 0 0 0 0 0 0 0 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           0 0 0 0 0 0 0 0 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           0 0 0 0 0 0 0 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           0 0 0 0 0 0 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 0 0 0 0 0 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 4278190080 4278190080
+	           4278190080 4278190080 4278190080 0 0 ).
+	^ (Form
+		   extent: 25 @ 11
+		   depth: 32
+		   fromArray: (aTag class = FamixTag
+				    ifTrue: [ arr ]
+				    ifFalse: [ arr2 ])
+		   offset: 0 @ 0)
+		  mapColor: Color black
+		  to:
+		  (aTag color ifNil: [ Color transparent ] ifNotNil: [ aTag color ])
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> addCategory: aName [
+
+	self mooseModel createTagCategoryNamed: aName
+]
+
+{ #category : #initialization }
+MiTagBrowserModel >> addDynamicTag: aDynamicTag [
+
+	dynamicTags add: aDynamicTag
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> addTag: aName [
+
+	^self mooseModel tagNamed: aName
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> allCategories [
+
+	^ self mooseModel
+		  ifNil: [ #(  ) ]
+		  ifNotNil: [ :model | model allTagCategories ]
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> allTags [
+
+	^ self mooseModel
+		  ifNil: [ #(  ) ]
+		  ifNotNil: [ :model | model allTags ]
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> currentCategory [
+
+	^ currentCategory
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> currentCategory: aCategory [
+
+	currentCategory := aCategory
+
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> currentTag [
+
+	^ currentTag
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> currentTag: anObject [
+	currentTag := anObject.
+	browser newTagSelected
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> deleteCurrentCategory [
+
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> deleteCurrentTag [
+
+	| tag |
+	tag := currentTag.
+	tag isIntent ifTrue: [ 
+		dynamicTags remove: tag.
+		^ tag ]. tag remove.
+	tag categories ifNotEmpty: [ tag categories first removeTag: tag ].
+	self currentTag: nil.
+	^ tag
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> dynamicTags [
+
+	^ dynamicTags
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> entities [
+
+	^ entities ifNil: [ {  } ]
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> entities: anObject [
+
+	entities := anObject
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> entitiesTaggedWithCurrentTag [
+
+	self currentTag ifNil: [ ^ #(  ) ].
+	^ self mooseModel entitiesTaggedWith: self currentTag
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> getTagNamed: tagName [
+
+	^ [ self mooseModel findTagNamed: tagName ]
+		  on: NotFound
+		  do: [ nil ]
+]
+
+{ #category : #initialization }
+MiTagBrowserModel >> initialize [
+
+	super initialize.
+	dynamicTags := OrderedCollection new
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> mooseModel [
+
+	^ mooseModel ifNil: [ 
+		  self entities
+			  ifEmpty: [ nil ]
+			  ifNotEmpty: [ mooseModel := self entities anyOne mooseModel ] ]
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> mooseModel: anAlcixModel [ 
+	mooseModel := anAlcixModel
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> tagEntityNotYourself: anEntity [
+
+	| assoc |
+	self currentTag = anEntity ifTrue: [ ^ self ].
+	assoc := FamixTagEntityAssociation
+		         newForEntity: anEntity
+		         tag: self currentTag.
+	browser application consumeItem: assoc
+]
+
+{ #category : #accessing }
+MiTagBrowserModel >> untagEntity: anEntity [
+
+	| assoc |
+	assoc := anEntity allTagAssociations
+		         detect: [ :a | a tag = self currentTag ]
+		         ifNone: [ nil ].
+	assoc ifNil: [ ^ self ].
+	browser application removeItem: assoc.
+	assoc remove
+]
