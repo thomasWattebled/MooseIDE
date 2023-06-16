@@ -123,7 +123,7 @@ Class {
 		'tWithImports',
 		'tConcretisation',
 		'tParameterConcretisation',
-		'tConcreteEntity',
+		'tParametricEntity',
 		'tConcreteParameterType',
 		'tGenericParameterType'
 	],
@@ -1174,8 +1174,6 @@ FamixGenerator >> defineProperties [
 		'Start position in the source'.
 	(tRelativeSourceAnchor property: #endPos type: #Number) comment:
 		'Stop position in the source'.
-		
-	(tConcreteEntity property:#isConcreteEntity type:#Boolean defaultValue: false).
 ]
 
 { #category : #definition }
@@ -1510,12 +1508,12 @@ FamixGenerator >> defineRelations [
 	
 	(tGenericParameterType property:#genericEntity)
 	*-*
-	(tConcreteEntity property:#genericParameter).
+	(tParametricEntity property:#genericParameter).
 	
 	
 	(tConcreteParameterType  property:#concreteEntity)
 	*-*
-	(tConcreteEntity property:#concreteParameter).
+	(tParametricEntity property:#concreteParameter).
 	
 	
 	"((tParameterConcretisation property:#concreteType)source)
@@ -1535,11 +1533,11 @@ FamixGenerator >> defineRelations [
 	((tParameterConcretisation property:#concreteParam)).
 
 	
-	((tConcreteEntity  property: #concretisation)source)
+	((tParametricEntity  property: #concretisation)source)
 		*-
 	((tConcretisation property: #genericEntity)).
 
-	((tConcreteEntity  property: #genericEntities)target)
+	((tParametricEntity  property: #genericEntities)target)
 		*-
 	((tConcretisation  property: #concreteEntity)).
 ]
@@ -1901,7 +1899,7 @@ FamixGenerator >> defineTraits [
 		
 	tConcretisation  := builder newTraitNamed: #TConcretisation.
 	tParameterConcretisation  := builder newTraitNamed: #TParameterConcretisation.
-	tConcreteEntity := builder newTraitNamed: #TConcreteEntity
+	tParametricEntity := builder newTraitNamed: #TParametricEntity
 								comment: self commentForTConcreteEntity.
 	tConcreteParameterType  := builder newTraitNamed: #TConcreteParameterType.
 	tGenericParameterType  := builder newTraitNamed: #TGenericParameterType.

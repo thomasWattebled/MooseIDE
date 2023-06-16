@@ -39,6 +39,7 @@ Class {
 		'import',
 		'parametricClass',
 		'parametricMethod',
+		'parametricInterface',
 		'concretisation',
 		'parameterConcretisation'
 	],
@@ -152,6 +153,7 @@ FamixJavaGenerator >> defineClasses [
 	
 	parametricClass   := builder newClassNamed: #ParametricClass.
 	parametricMethod  := builder newClassNamed: #ParametricMethod.
+	parametricInterface := builder newClassNamed: #ParametricInterface.
 	concretisation := builder newClassNamed: #Concretisation.
 	parameterConcretisation := builder newClassNamed: #ParameterConcretisation.
 	self defineComments
@@ -336,10 +338,13 @@ FamixJavaGenerator >> defineHierarchy [
 	
 		
 	parametricClass  --|> class.
-	parametricClass  --|> #TConcreteEntity.
+	parametricClass  --|> #TParametricEntity.
 	
 	parametricMethod  --|> method.
-	parametricMethod  --|> #TConcreteEntity.
+	parametricMethod  --|> #TParametricEntity.
+	
+	parametricInterface --|> interface.
+	parametricInterface --|> #TParametricEntity.
 	
 	parameterType --|> #TGenericParameterType.
 	

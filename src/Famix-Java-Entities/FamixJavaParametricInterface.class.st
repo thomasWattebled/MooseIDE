@@ -1,15 +1,15 @@
 Class {
-	#name : #FamixJavaParametricMethod,
-	#superclass : #FamixJavaMethod,
+	#name : #FamixJavaParametricInterface,
+	#superclass : #FamixJavaInterface,
 	#traits : 'FamixTParametricEntity',
 	#classTraits : 'FamixTParametricEntity classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
 { #category : #meta }
-FamixJavaParametricMethod class >> annotation [
+FamixJavaParametricInterface class >> annotation [
 
-	<FMClass: #ParametricMethod super: #FamixJavaMethod>
+	<FMClass: #ParametricInterface super: #FamixJavaInterface>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
